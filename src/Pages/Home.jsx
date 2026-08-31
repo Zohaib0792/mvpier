@@ -1,11 +1,108 @@
-import Hero from "../components/Hero";
-
+import { useState } from "react";
+import Card from "../components/Card";
+import { products } from "../data/product";
 
 
 function Home() {
+    const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredProducts =
+    selectedCategory === "All"
+      ? products
+      : products.filter((product) => product.category === selectedCategory);
 return(
     <div>
-        <Hero />
+    <section className="flex flex-col justify-center h-[80vh] items-center bg-gradient-to-r from-blue-500 via-purple-400 to-purple-600 gap-4">
+        {/* <Hero /> */}
+        <div className="flex flex-col items-center gap-4">
+            <h1 className="text-7xl text-white">Welcome to TechHub Store</h1>
+            <p className="text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga, quibusdam accusamus reiciendis sunt provident amet alias deserunt
+            </p>
+        </div>
+        <div className="flex  gap-4">
+            <a href="http://" target="_blank" rel="noopener noreferrer" className="bg-white text-blue-500 py-2 px-3 rounded-lg border-2 border-blue-500">Shop Now</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer" className="bg-blue-500 text-white py-2 px-3 rounded-lg border-2 border-white">Learn More</a>
+
+        </div>
+
+</section>
+{/* feature products */}
+<section className="bg-gray-100">
+    <div className="flex flex-col p-4 gap-3 justify-center items-center">
+        <h1 className="text-3xl bold">Featured Products</h1>
+        <p className='text-gray-600'>Lorem ipsum dolor sit amet consectetur </p>
+    </div>
+<div className="flex gap-4 m-3 ">
+      <button
+        onClick={() => setSelectedCategory("All")}
+        className={
+          selectedCategory == "All"
+            ? "bg-black text-white py-2 px-3 rounded-lg"
+            : "bg-white text-black py-2 px-3 rounded-lg"
+            
+        }
+      >
+        All
+      </button>
+
+      <button
+        onClick={() => setSelectedCategory("Laptops")}
+        className={
+          selectedCategory == "Laptops"
+           ? "bg-black text-white py-2 px-3 rounded-lg"
+            : "bg-white text-black py-2 px-3 rounded-lg"
+        }
+      >
+        Laptops
+      </button>
+
+      <button onClick={() => setSelectedCategory("Smartphones")}
+          className={
+          selectedCategory == "Smartphone"
+           ? "bg-black text-white py-2 px-3 rounded-lg"
+            : "bg-white text-black py-2 px-3 rounded-lg"
+        }>
+        Smartphones
+      </button>
+      <button
+      onClick={() => setSelectedCategory("Headphones")}
+          className={
+          selectedCategory == "Headphones"
+           ? "bg-black text-white py-2 px-3 rounded-lg"
+            : "bg-white text-black py-2 px-3 rounded-lg"
+        }>Headphones</button>
+      <button
+      onClick={() => setSelectedCategory("Gaming")}
+          className={
+          selectedCategory == "Gaming"
+           ? "bg-black text-white py-2 px-3 rounded-lg"
+            : "bg-white text-black py-2 px-3 rounded-lg"
+        }>Gaming</button>
+         <button
+      onClick={() => setSelectedCategory("Watches")}
+          className={
+          selectedCategory == "Watches"
+           ? "bg-black text-white py-2 px-3 rounded-lg"
+            : "bg-white text-black py-2 px-3 rounded-lg"
+        }>Watches</button>
+      </div>
+<div>
+      <div className="grid grid-cols-4 gap-3 m-4">
+        {filteredProducts.map((product) => (
+          <Card key={product.id} {...product} />
+        ))}
+      </div>
+    </div>
+
+</section>
+
+{/* services */}
+<section>
+    <div className="flex mt-28 justify-center items-center">
+        <h1 className="text-3xl bold">Why Choose TechHub </h1>
+        
+    </div>
+</section>
     </div>
 )
     
